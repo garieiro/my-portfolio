@@ -1,95 +1,65 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client'
+import React from 'react'
+import './globals.css'
+import styles from './page.module.css'
+import { Box, Flex, Grid, Image, Text } from '@chakra-ui/react'
+import imageInformation from '../../public/me.png'
+import UseScreenWidth from '@/hooks/useScreenWidth'
 
-export default function Home() {
+function Home() {
+  const isMobile = UseScreenWidth()
+  const imageInformationUrl = imageInformation.src
+  const textToType = [
+    "Hello! I'm Gonçalo, a 26-year-old technology enthusiast currently based in the vibrant city of Barcelona, Spain.",
+    'I completed my degree in Computer and Telematics Engineering at the prestigious University of Aveiro, where I gained a solid and diverse foundation in technology.',
+    "With two-years of professional experience, I accumulated valuable experience and contributed to significant projects. Now, I'm eager to take on new challenges and explore exciting opportunities.",
+    "In my free time, I engage in personal projects to broaden my knowledge in various aspects of the technology field. I'm a fan of series, enjoy playing video games, and, spending time in nature, specially at the beach or any sea-related activity. On weekends, I don't miss the chance to unwind and socialize over a good beer.",
+    "I'm thrilled about the prospect of contributing to innovative projects and continuously learning. If you're looking for a dedicated professional passionate about technology, I'm open to new opportunities and ready to make a difference.",
+  ]
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
+    <React.Fragment>
+      <Grid
+        className={
+          !isMobile ? styles.homeContainer : styles.homeContainerMobile
+        }
+      >
+        <Box
+          className={
+            !isMobile
+              ? styles.homeContentContainer
+              : styles.homeContentContainerMobile
+          }
         >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
+          <Text className={styles.textTitleStyle}>Welcome to My Portfolio</Text>
+          <Flex className={styles.homeDescriptionContainer}>
+            {textToType.map((description, index) => (
+              <Text
+                className={styles.textDescriptionStyle}
+                align="justify"
+                key={index}
+              >
+                {description}
+              </Text>
+            ))}
+          </Flex>
+        </Box>
+        <Box
+          className={
+            !isMobile
+              ? styles.homeImageContainer
+              : styles.homeImageContainerMobile
+          }
         >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  );
+          <Image
+            className={!isMobile ? styles.homeImage : styles.homeImageMobile}
+            src={imageInformationUrl}
+            alt="owner_image"
+          />
+        </Box>
+      </Grid>
+    </React.Fragment>
+  )
 }
+
+export default Home

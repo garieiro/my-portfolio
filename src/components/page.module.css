@@ -1,0 +1,60 @@
+/* Header Styles */
+.headerStyle {
+  grid-template-columns: 90px 400px 1fr 1fr;
+  background-color: #9d7c5b;
+  width: 100%;
+  align-items: center;
+}
+
+.headerStyleMobile {
+  grid-template-columns: 50px 50px 1fr 100px;
+  background-color: #9d7c5b;
+  width: 100%;
+  align-items: center;
+}
+
+.homeStyle {
+  display: flex;
+  justify-content: center;
+}
+
+.tabSpaceStyle {
+  padding-right: 15px;
+}
+
+.linkHeaderStyle {
+  color: black;
+  text-decoration: none;
+}
+
+.linkHeaderStyle:hover {
+  text-decoration: underline;
+}
+
+.activeLink {
+  font-weight: bold;
+}
+
+.menuSection {
+  display: flex;
+  justify-content: center;
+}
+
+.sectionLogoStyle {
+  display: flex;
+  justify-content: center;
+}
+
+.logoStyle {
+  border-radius: 50%;
+}
+
+.socialSection {
+  justify-content: flex-end;
+}
+
+.socialStyle {
+  padding-right: 15px;
+}
+
+/* ---- */

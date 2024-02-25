@@ -1,7 +1,7 @@
 'use client'
 import React, { useState } from 'react'
 import styles from './page.module.css'
-import '../globals.css'
+import '../theme'
 import {
   Box,
   Button,

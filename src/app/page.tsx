@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import './globals.css'
+import './theme'
 import styles from './page.module.css'
 import { Box, Flex, Grid, Image, Text } from '@chakra-ui/react'
 import imageInformation from '../../public/me.png'

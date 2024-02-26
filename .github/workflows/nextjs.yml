@@ -29,7 +29,18 @@ env:
   MAIL_FROM_PORTFOLIO: ${{ secrets.MAIL_FROM_PORTFOLIO}}
   MAIL_FROM: ${{ secrets.MAIL_FROM}}
   NEXT_SHARP_PATH: ${{ secrets.NEXT_SHARP_PATH}}
+  
 jobs:
+  debug:
+      runs-on: ubuntu-latest
+  
+      steps:
+        - name: Print Environment Variables
+          run: |
+            echo "RESEND_API_KEY: $RESEND_API_KEY"
+            echo "MAIL_FROM_PORTFOLIO: $MAIL_FROM_PORTFOLIO"
+            echo "MAIL_FROM: $MAIL_FROM"
+            echo "NEXT_SHARP_PATH: $NEXT_SHARP_PATH"
   # Build job
   build:
     runs-on: ubuntu-latest

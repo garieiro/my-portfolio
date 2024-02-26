@@ -26,6 +26,9 @@ concurrency:
 
 env:
   RESEND_API_KEY: ${{ secrets.RESEND_API_KEY}}
+  MAIL_FROM_PORTFOLIO: ${{ secrets.MAIL_FROM_PORTFOLIO}}
+  MAIL_FROM: ${{ secrets.MAIL_FROM}}
+  NEXT_SHARP_PATH: ${{ secrets.NEXT_SHARP_PATH}}
 jobs:
   # Build job
   build:

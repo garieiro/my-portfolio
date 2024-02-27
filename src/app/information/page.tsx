@@ -23,7 +23,7 @@ interface Category {
   skills: string[]
 }
 
-function Information() {
+const Information = () => {
   const isMobile = UseScreenWidth()
   const resourcesImage = Resources.src
   const [showModal, setShowModal] = useState(false)

@@ -29,7 +29,7 @@ export const EmailTemplate = (firstName: string, message?: string) => {
                 padding: '7px',
                 borderRadius: '12px',
               }}
-              href="Link to my portfolio"
+              href="garieiro.com"
             >
               Gonçalo&apos;s portfolio
             </Button>
@@ -48,7 +48,7 @@ export const EmailTemplate = (firstName: string, message?: string) => {
                 padding: '7px',
                 borderRadius: '12px',
               }}
-              href="Link to my portfolio"
+              href="garieiro.com"
             >
               Gonçalo&apos;s portfolio
             </Button>

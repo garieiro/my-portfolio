@@ -24,7 +24,7 @@ interface ProfessionalCardProps {
   modalDescription: string[]
 }
 
-function Professional() {
+const Professional = () => {
   const firstJob = FirstJon.src
   const [showModal, setShowModal] = useState(false)
   const [selectedCard, setSelectedCard] =

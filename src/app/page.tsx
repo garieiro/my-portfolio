@@ -6,7 +6,7 @@ import { Box, Flex, Grid, Image, Text } from '@chakra-ui/react'
 import imageInformation from '../../public/me.png'
 import UseScreenWidth from '@/hooks/useScreenWidth'
 
-function Home() {
+const Home = () => {
   const isMobile = UseScreenWidth()
   const imageInformationUrl = imageInformation.src
   const textToType = [

@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { ChangeEvent, useState } from 'react'
 import {
   Box,
   Center,
@@ -9,34 +9,90 @@ import {
   Textarea,
   Button,
   Text,
+  useToast,
 } from '@chakra-ui/react'
 import styles from './page.module.css'
 
 const Contact = () => {
-  const [firstName, setFirstName] = useState('')
-  const [subject, setSubject] = useState('')
-  const [email, setEmail] = useState('')
-  const [message, setMessage] = useState('')
+  const [formData, setFormData] = useState({
+    firstName: '',
+    subject: '',
+    email: '',
+    message: '',
+  })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const toast = useToast()
+  const loadingToastId = 'loading-toast'
+
+  const createErrorToast = () => {
+    toast({
+      title: 'Error sending email',
+      description: 'Please try again later.',
+      status: 'error',
+      duration: 3000,
+      isClosable: true,
+    })
+  }
+
+  const createSuccessToast = () => {
+    toast({
+      title: 'Email sent successfully',
+      description: 'We will get back to you soon!',
+      status: 'success',
+      duration: 3000,
+      isClosable: true,
+    })
+  }
+  const createLoadingToast = () => {
+    toast({
+      id: loadingToastId,
+      title: 'Email sent Loading',
+      description: 'We will get back to you soon!',
+      status: 'loading',
+      isClosable: true,
+    })
+    return loadingToastId
+  }
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }))
+  }
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     try {
-      await fetch('https://api.resend.com/emails', {
+      createLoadingToast()
+      setIsSubmitting(true)
+      const response = await fetch('api/send', {
         method: 'POST',
-        body: JSON.stringify({
-          firstName,
-          subject,
-          email,
-          message,
-        }),
+        body: JSON.stringify(formData),
         headers: { 'content-type': 'application/json' },
       })
+
+      if (response.ok) {
+        createSuccessToast()
+        setFormData({
+          firstName: '',
+          subject: '',
+          email: '',
+          message: '',
+        })
+      } else {
+        createErrorToast()
+      }
     } catch (error) {
-      return {
-        error:
-          error instanceof Error
-            ? error.message
-            : 'An unexpected error occurred.',
+      createErrorToast()
+      console.log('Error sending the e-mail.')
+    } finally {
+      setIsSubmitting(false)
+      if (loadingToastId) {
+        toast.close(loadingToastId)
       }
     }
   }
@@ -46,7 +102,7 @@ const Contact = () => {
       <Text className={styles.textDescriptionStyle}>
         If you have any questions, don&apos;t hesitate to get in touch.
       </Text>
-      <Center>
+      <Center className={styles.formStyle}>
         <Box
           p={8}
           width="500px"
@@ -60,8 +116,9 @@ const Contact = () => {
             <FormControl isRequired>
               <FormLabel htmlFor="name">Name</FormLabel>
               <Input
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
+                name="firstName"
+                value={formData.firstName}
+                onChange={(e) => handleChange(e)}
                 borderColor="gray.400"
                 type="text"
                 id="name"
@@ -71,8 +128,9 @@ const Contact = () => {
             <FormControl mt={4} isRequired>
               <FormLabel htmlFor="email">Email</FormLabel>
               <Input
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                name="email"
+                value={formData.email}
+                onChange={(e) => handleChange(e)}
                 borderColor="gray.400"
                 type="email"
                 id="email"
@@ -82,8 +140,9 @@ const Contact = () => {
             <FormControl mt={4} isRequired>
               <FormLabel htmlFor="subject">Subject</FormLabel>
               <Input
-                value={subject}
-                onChange={(e) => setSubject(e.target.value)}
+                name="subject"
+                value={formData.subject}
+                onChange={(e) => handleChange(e)}
                 borderColor="gray.400"
                 type="text"
                 id="subject"
@@ -93,14 +152,26 @@ const Contact = () => {
             <FormControl mt={4} isRequired>
               <FormLabel htmlFor="message">Message</FormLabel>
               <Textarea
+                name="message"
+                value={formData.message}
                 borderColor="gray.400"
                 id="message"
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
+                onChange={(e) => handleChange(e)}
               />
             </FormControl>
 
-            <Button mt={6} colorScheme="gray" type="submit">
+            <Button
+              mt={6}
+              colorScheme="gray"
+              type="submit"
+              isDisabled={
+                !formData.firstName ||
+                !formData.email ||
+                !formData.subject ||
+                !formData.message ||
+                isSubmitting
+              }
+            >
               Submit
             </Button>
           </form>

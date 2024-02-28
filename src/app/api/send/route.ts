@@ -26,17 +26,14 @@ export async function POST(req: Request) {
       if (sendMe.data) {
         return NextResponse.json({ success: true })
       } else {
-        throw new Error(JSON.stringify(sendMe.error))
+        return NextResponse.json(sendMe.error)
       }
     } else {
-      throw new Error(JSON.stringify(sendClient.error))
+      return NextResponse.json(sendClient.error)
     }
   } catch (error) {
     return NextResponse.json({
-      error:
-        error instanceof Error
-          ? error.message
-          : 'An unexpected error occurred.',
+      error: 'An unexpected error occurred.',
     })
   }
 }

@@ -4,6 +4,7 @@ import { ChakraProvider } from '@chakra-ui/react'
 import Header from '../components/Header'
 import { theme } from '@/app/theme'
 import { SpeedInsights } from '@vercel/speed-insights/next'
+import { Analytics } from '@vercel/analytics/react'
 
 interface RootLayoutProps {
   children: React.ReactNode
@@ -17,6 +18,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <Header />
           {children}
           <SpeedInsights />
+          <Analytics />
         </ChakraProvider>
       </body>
     </html>

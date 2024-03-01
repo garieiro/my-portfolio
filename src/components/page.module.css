@@ -51,7 +51,7 @@
 }
 
 /* Mobile */
-@media (max-width:700px) {
+@media (max-width:1120px) {
   .headerStyle {
     grid-template-columns: 50px 50px 1fr 100px;
     background-color: #9d7c5b;

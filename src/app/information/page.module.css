@@ -49,7 +49,7 @@
 
 /* Mobile & Tablet */
 
-@media (max-width: 900px) {
+@media (max-width: 1120px) {
   .informationContainer {
     padding-top: 50px;
     padding-left: 20px;
@@ -95,7 +95,7 @@
   }
 }
 
-@media (min-width: 900px) {
+@media (min-width: 1120px) {
   .informationImageContainer {
     align-items: center;
     padding-left: 50px;

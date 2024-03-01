@@ -7,7 +7,7 @@ const UseScreenWidth = () => {
     if (typeof window !== 'undefined' && window.localStorage) {
       const checkScreenWidth = () => {
         const width = window.innerWidth
-        const mobile = width < 700
+        const mobile = width < 1120
         setIsMobile(mobile)
         localStorage.setItem('windowWidth', width.toString())
       }

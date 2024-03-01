@@ -8,21 +8,7 @@ import Me from '../../public/me.png'
 import DropDown from '@/components/DropDown'
 import useScreenWidth from '@/hooks/useScreenWidth'
 import { usePathname } from 'next/navigation'
-
-const navLinks = [
-  {
-    title: 'Personal Information',
-    path: '/information',
-  },
-  {
-    title: 'Profissional Career',
-    path: '/professional',
-  },
-  {
-    title: 'Contact Me',
-    path: '/contact',
-  },
-]
+import { navLinks } from '@/utils/utils'
 
 const Header = () => {
   const isMobile = useScreenWidth()
@@ -33,7 +19,7 @@ const Header = () => {
   const pathname = usePathname()
 
   return (
-    <Grid className={!isMobile ? styles.headerStyle : styles.headerStyleMobile}>
+    <Grid className={styles.headerStyle}>
       <GridItem className={styles.homeStyle}>
         <Link href={'/'}>
           <Image src={homeIcon} alt="Home Icon" />

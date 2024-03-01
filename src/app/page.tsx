@@ -1,13 +1,10 @@
-'use client'
 import React from 'react'
 import './theme'
 import styles from './page.module.css'
-import { Box, Flex, Grid, Image, Text } from '@chakra-ui/react'
+import { Box, Flex, Image, Text } from '@chakra-ui/react'
 import imageInformation from '../../public/me.png'
-import UseScreenWidth from '@/hooks/useScreenWidth'
 
 const Home = () => {
-  const isMobile = UseScreenWidth()
   const imageInformationUrl = imageInformation.src
   const textToType = [
     "Hello! I'm Gonçalo, a 26-year-old technology enthusiast currently based in the vibrant city of Barcelona, Spain.",
@@ -19,18 +16,8 @@ const Home = () => {
 
   return (
     <React.Fragment>
-      <Grid
-        className={
-          !isMobile ? styles.homeContainer : styles.homeContainerMobile
-        }
-      >
-        <Box
-          className={
-            !isMobile
-              ? styles.homeContentContainer
-              : styles.homeContentContainerMobile
-          }
-        >
+      <Flex className={styles.homeContainer}>
+        <Box className={styles.homeContentContainer}>
           <Text className={styles.textTitleStyle}>Welcome to My Portfolio</Text>
           <Flex className={styles.homeDescriptionContainer}>
             {textToType.map((description, index) => (
@@ -44,20 +31,10 @@ const Home = () => {
             ))}
           </Flex>
         </Box>
-        <Box
-          className={
-            !isMobile
-              ? styles.homeImageContainer
-              : styles.homeImageContainerMobile
-          }
-        >
-          <Image
-            className={!isMobile ? styles.homeImage : styles.homeImageMobile}
-            src={imageInformationUrl}
-            alt="owner_image"
-          />
-        </Box>
-      </Grid>
+        <Flex className={styles.homeImageContainer}>
+          <Image src={imageInformationUrl} alt="owner_image" />
+        </Flex>
+      </Flex>
     </React.Fragment>
   )
 }

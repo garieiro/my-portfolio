@@ -5,7 +5,7 @@ import '../theme'
 import {
   Box,
   Button,
-  Grid,
+  Flex,
   Image,
   Link,
   List,
@@ -15,7 +15,6 @@ import {
 import NextLink from 'next/link'
 import Resources from '../../../public/resources.jpeg'
 import SkillsModal from '../../components/SkillsModal'
-import UseScreenWidth from '@/hooks/useScreenWidth'
 
 interface Category {
   id: number
@@ -24,7 +23,6 @@ interface Category {
 }
 
 const Information = () => {
-  const isMobile = UseScreenWidth()
   const resourcesImage = Resources.src
   const [showModal, setShowModal] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(
@@ -74,22 +72,11 @@ const Information = () => {
   }
   return (
     <React.Fragment>
-      <Grid
-        className={
-          !isMobile
-            ? styles.informationContainer
-            : styles.informationContainerMobile
-        }
-      >
-        <Box className={!isMobile ? styles.informationContentContainer : ''}>
+      <Flex className={styles.informationContainer}>
+        <Box className={styles.informationContentContainer}>
           <Box>
             <Text className={styles.textTitleStyle}>Skills</Text>
-            <ul
-              style={{
-                listStyleType: 'none',
-                paddingTop: '20px',
-              }}
-            >
+            <ul className={styles.informationListSkills}>
               {categories.map((category) => (
                 <li key={category.id} style={{ paddingTop: '10px' }}>
                   <Button
@@ -143,24 +130,14 @@ const Information = () => {
           </Box>
         </Box>
 
-        <Box
-          className={
-            !isMobile
-              ? styles.informationImageContainer
-              : styles.informationImageContainerMobile
-          }
-        >
+        <Flex className={styles.informationImageContainer}>
           <Image
             src={resourcesImage}
-            className={
-              !isMobile
-                ? styles.imageInformation
-                : styles.imageInformationMobile
-            }
+            className={styles.imageInformation}
             alt="resources_image"
           />
-        </Box>
-      </Grid>
+        </Flex>
+      </Flex>
     </React.Fragment>
   )
 }

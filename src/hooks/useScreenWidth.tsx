@@ -3,16 +3,20 @@ import { useEffect, useState } from 'react'
 
 const UseScreenWidth = () => {
   const [isMobile, setIsMobile] = useState(false)
-
   useEffect(() => {
-    const checkScreenWidth = () => {
-      setIsMobile(window.innerWidth <= 800)
-    }
-    checkScreenWidth()
-    window.addEventListener('resize', checkScreenWidth)
+    if (typeof window !== 'undefined' && window.localStorage) {
+      const checkScreenWidth = () => {
+        const width = window.innerWidth
+        const mobile = width < 700
+        setIsMobile(mobile)
+        localStorage.setItem('windowWidth', width.toString())
+      }
+      checkScreenWidth()
+      window.addEventListener('resize', checkScreenWidth)
 
-    return () => {
-      window.removeEventListener('resize', checkScreenWidth)
+      return () => {
+        window.removeEventListener('resize', checkScreenWidth)
+      }
     }
   }, [])
 

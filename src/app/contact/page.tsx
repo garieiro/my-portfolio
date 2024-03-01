@@ -9,50 +9,26 @@ import {
   Textarea,
   Button,
   Text,
-  useToast,
 } from '@chakra-ui/react'
 import styles from './page.module.css'
+import {
+  CreateErrorToast,
+  CreateLoadingToast,
+  CreateSuccessToast,
+} from '@/utils/utils'
 
 const Contact = () => {
+  const { showLoadingToast, closeLoadingToast } = CreateLoadingToast()
+  const { showSuccessToast } = CreateSuccessToast()
+  const { showErrorToast } = CreateErrorToast()
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const [formData, setFormData] = useState({
     firstName: '',
     subject: '',
     email: '',
     message: '',
   })
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const toast = useToast()
-  const loadingToastId = 'loading-toast'
 
-  const createErrorToast = () => {
-    toast({
-      title: 'Error sending email',
-      description: 'Please try again later.',
-      status: 'error',
-      duration: 3000,
-      isClosable: true,
-    })
-  }
-
-  const createSuccessToast = () => {
-    toast({
-      title: 'Email sent successfully',
-      description: 'We will get back to you soon!',
-      status: 'success',
-      duration: 3000,
-      isClosable: true,
-    })
-  }
-  const createLoadingToast = () => {
-    toast({
-      id: loadingToastId,
-      title: 'Email sent Loading',
-      description: 'We will get back to you soon!',
-      status: 'loading',
-      isClosable: true,
-    })
-    return loadingToastId
-  }
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -67,7 +43,7 @@ const Contact = () => {
     e.preventDefault()
 
     try {
-      createLoadingToast()
+      showLoadingToast()
       setIsSubmitting(true)
       const response = await fetch('api/send', {
         method: 'POST',
@@ -76,7 +52,7 @@ const Contact = () => {
       })
 
       if (response.ok) {
-        createSuccessToast()
+        showSuccessToast()
         setFormData({
           firstName: '',
           subject: '',
@@ -84,25 +60,23 @@ const Contact = () => {
           message: '',
         })
       } else {
-        createErrorToast()
+        showErrorToast()
       }
     } catch (error) {
-      createErrorToast()
+      showErrorToast()
       console.log('Error sending the e-mail.')
     } finally {
       setIsSubmitting(false)
-      if (loadingToastId) {
-        toast.close(loadingToastId)
-      }
+      closeLoadingToast()
     }
   }
   return (
-    <Box>
+    <Box className={styles.contactContainer}>
       <Text className={styles.textTitleStyle}>Contact Me!</Text>
       <Text className={styles.textDescriptionStyle}>
         If you have any questions, don&apos;t hesitate to get in touch.
       </Text>
-      <Center className={styles.formStyle}>
+      <Center>
         <Box
           p={8}
           width="500px"

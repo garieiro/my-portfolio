@@ -10,9 +10,10 @@ import {
   StackDivider,
   Text,
 } from '@chakra-ui/react'
-import FirstJon from '../../../public/talkdesk_logo.jpeg'
 import SkillsModal from '../../components/SkillsModal'
 import Image from 'next/image'
+import styles from './page.module.css'
+import { professionalCards } from '@/utils/utils'
 
 interface ProfessionalCardProps {
   id: number
@@ -25,31 +26,9 @@ interface ProfessionalCardProps {
 }
 
 const Professional = () => {
-  const firstJob = FirstJon.src
   const [showModal, setShowModal] = useState(false)
   const [selectedCard, setSelectedCard] =
     useState<ProfessionalCardProps | null>(null)
-
-  const professionalCards = [
-    {
-      id: 1,
-      imageSrc: firstJob,
-      title: 'Talkdesk',
-      role: 'Software Engineer I',
-      date: 'January 2021 - October 2023',
-      cardDescription:
-        'Collaborated in a team focused on integrating Talkdesk with Microsoft Teams. ' +
-        'I was one of the elements of a team focused on integrations. This team was part of a critical component of the ' +
-        'platform that allowed Talkdesk to integrate with important UC providers, such as Microsoft Teams.',
-      modalDescription: [
-        'On the team, I had the opportunity to improve the functionalities of an existing web application, built using React. These improvements resulted in a significant increase in the user experience, directly reflecting the increase in sales of this product.',
-        'To improve the previously mentioned web application, I developed a new application with React, using Redux. This new implementation made it possible to obtain the real state of each user’s presence, resulting in a notable improvement in the user experience.',
-        'To centralize and optimize information, I transferred all data to an existing web application. Developed in Ruby on the backend, using the Ruby on Rails framework, and JavaScript with Handlebars on the frontend, this application serves as a dedicated platform for the internal team to carry out maintenance and debug possible errors.',
-        'Utilized Postman for API request simulations, ensuring smooth communication between Talkdesk and Microsoft Teams.',
-        'Implemented TypeScript and JavaScript for both frontend development and test script writing, ensuring type safety and code reliability.',
-      ],
-    },
-  ]
 
   const handleShowModal = (card: ProfessionalCardProps) => {
     setSelectedCard(card)
@@ -62,9 +41,9 @@ const Professional = () => {
   }
   return (
     <React.Fragment>
-      <Flex>
+      <Flex className={styles.professionalContainer}>
         {professionalCards.map((card: ProfessionalCardProps) => (
-          <Flex key={card.id} paddingTop="50px" paddingLeft="50px">
+          <Flex key={card.id} className={styles.professionalContentContainer}>
             <Card width="250px" variant="solid" backgroundColor="white">
               <CardHeader display="flex" justifyContent="center">
                 <Image

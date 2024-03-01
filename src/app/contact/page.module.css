@@ -1,7 +1,10 @@
+.contactContainer {
+  padding-top: 50px;
+}
+
 .textTitleStyle {
   font-size: 40px;
   text-align: center;
-  padding-top: 50px;
 }
 
 .textDescriptionStyle {
@@ -9,6 +12,12 @@
   padding-bottom: 30px;
 }
 
-.formStyle {
-  padding-inline: 50px;
+/* Mobile & Tablet */
+
+@media (max-width: 1120px) {
+  .contactContainer {
+    padding-top: 50px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 }

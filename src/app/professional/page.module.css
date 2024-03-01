@@ -1,0 +1,21 @@
+.professionalContainer {
+    flex-direction: row ;
+    padding-top: 50px;
+}
+
+.professionalContentContainer {
+    padding-inline: 50px;
+}
+
+/* Mobile & Tablet */
+@media (max-width: 700px) {
+    .professionalContainer {
+        flex-direction: column ;
+    }
+
+    .professionalContentContainer {
+        flex-direction: row ;
+        justify-content: center;
+        padding-bottom: 30px;
+    }
+}
